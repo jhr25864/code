@@ -1,7 +1,9 @@
 from multifighters.simulation_env import CombatEnv
 from multifighters.SimInput import FighterDataIn, print_outdata
 
+######################## tcp通信 by ybw ########################
 
+###############################################################
 if __name__ == '__main__':
     # 初始化设定
     env = CombatEnv()
@@ -19,7 +21,6 @@ if __name__ == '__main__':
         outdata = env.reset()
 
         for t in range(12000):
-
             # 编辑输入控制数据
             #######################################################################
             # 直接控制模式的动作输入
@@ -64,4 +65,3 @@ if __name__ == '__main__':
                 print("Episode: \t{} ,episode len is: \t{}".format(i_episode, t))
                 print(terminal, blue_time_count, red_time_count)
                 break
-
