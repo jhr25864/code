@@ -5,13 +5,11 @@ import sys
 
 
 # 创建存储对象
-# 于博文
 class Node:
     def __init__(self):
         self.Name = None    # 小飞机序号
         self.Thr = None     # 套接字连接对象
-        self.Name = None    # 小飞机序号
-        self.Thr = None     # 套接字连接对象
+        
 
 
 class TcpServer:
