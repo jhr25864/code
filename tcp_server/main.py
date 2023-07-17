@@ -10,8 +10,9 @@ class Node:
     def __init__(self):
         self.Name = None    # 小飞机序号
         self.Thr = None     # 套接字连接对象
-        self.Name = None    # 小飞机序号
-        self.Thr = None     # 套接字连接对象
+
+        #jhr
+
 
 
 class TcpServer:
