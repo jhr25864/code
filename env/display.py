@@ -10,7 +10,7 @@ from math import radians, tan
 # 从txt文件读取数据
 data = []
 
-with open('output_copy.txt','r') as file:
+with open('output_meter.txt','r') as file:
     for line in file:
         line = line.strip()
         if line.startswith('[') and line.endswith(']'):

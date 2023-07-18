@@ -177,15 +177,9 @@ def print_alertdata(i, data):
 # 姜宏睿后续添加，主要用于生成matlab仿真可视化文件。
 #主要逻辑为：首先将仿真生成的所有数据保存在output.txt中，然后利用display.py依据此数据画出四个无人机的简单轨迹
 #用于快速复盘仿真
-def print_outdata2(outdata):
+def write_outdata(outdata):
 
     for i in range(len(outdata)):
-        if i == 0:
-            print('__________________________________________________________________________________'
-                  '__________________________________________________________________________________')
-        if i != 0:
-            print('\n')
-
         print_positiondata(i, outdata[i])
         # print(a)
         # print(b)

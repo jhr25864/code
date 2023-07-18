@@ -1,10 +1,11 @@
 from multifighters.simulation_env import CombatEnv
 from multifighters.SimInput import FighterDataIn, print_outdata
-from multifighters.SimInput import print_outdata2
+from multifighters.SimInput import write_outdata
 
 ######################## tcp通信 by ybw ########################
 
 ###############################################################
+output_file = open('output_all.txt','w')
 if __name__ == '__main__':
     # 初始化设定
     env = CombatEnv()
@@ -59,8 +60,10 @@ if __name__ == '__main__':
 
             # 打印数据
             print('\n仿真步长', t)
-            print_outdata(outdata)
-            print_outdata2(outdata)
+            # print_outdata(outdata)
+            write_outdata(outdata)
+
+
 
             # 仿真结束
             if terminal >= 0:
