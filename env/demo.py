@@ -6,6 +6,9 @@ from multifighters.SimInput import write_outdata
 
 ###############################################################
 output_file = open('output_all.txt','w')
+
+# 若想存控制台输入，直接用管理员打开anaconda控制台，然后运行python demo.py >> output.txt
+#  备注：output.txt务必是文件中不存在的文件，如果存在，会报错（写入被拒绝）
 if __name__ == '__main__':
     # 初始化设定
     env = CombatEnv()
@@ -60,8 +63,8 @@ if __name__ == '__main__':
 
             # 打印数据
             print('\n仿真步长', t)
-            # print_outdata(outdata)
-            write_outdata(outdata)
+            print_outdata(outdata)
+            # write_outdata(outdata)
 
 
 
