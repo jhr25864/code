@@ -1,11 +1,18 @@
 import numpy as np
 import math
+from math import radians, tan
+
 
 fighter_str = '.\MultiFighter.dll'
 missile_str = '.\CBB_py.dll'
 txt_log_switch = True
 log_match = False
 
+
+# 用于生成可供读取的经纬高文件
+a = []
+b = []
+output_file = open('output.txt','w')
 
 class FighterDataIn(object):
     def __init__(self):
@@ -84,6 +91,7 @@ def print_selfdata(i, data):
               '| 地速', '%10.5f' % data.selfdata.GroundSpeed,
               '| 剩余油量', '%10.5f' % data.selfdata.NumberofFuel,
               '| 推力', '%10.0f' % data.selfdata.Thrust,
+              # 0：未发射；1：飞行中；2：命中；3：失效
               '| 导弹1状态', data.selfdata.Missile1State,
               '| 导弹2状态', data.selfdata.Missile2State, '|',
               )
@@ -166,3 +174,61 @@ def print_alertdata(i, data):
           '| 导弹告警方位角',data.alertdata.emergency_missile_AziAngle,
           )
 
+# 姜宏睿后续添加，主要用于生成matlab仿真可视化文件。
+#主要逻辑为：首先将仿真生成的所有数据保存在output.txt中，然后利用display.py依据此数据画出四个无人机的简单轨迹
+#用于快速复盘仿真
+def print_outdata2(outdata):
+
+    for i in range(len(outdata)):
+        if i == 0:
+            print('__________________________________________________________________________________'
+                  '__________________________________________________________________________________')
+        if i != 0:
+            print('\n')
+
+        print_positiondata(i, outdata[i])
+        # print(a)
+        # print(b)
+        # print(len(b))
+        # output_file.write("Data:\n")
+        data_str = str(a)
+        if data_str is not None:
+            output_file.write(data_str)
+            output_file.write("\n")
+        a.clear()
+
+def lat_lon_to_xz(latitude, longitude):
+    # 地球半径，单位为千米
+    EARTH_RADIUS = 6371.0
+
+    # 将经纬度转换为弧度
+    lat_rad = radians(latitude)
+    lon_rad = radians(longitude)
+
+    # 计算墨卡托投影的平面坐标
+    x = EARTH_RADIUS * lon_rad
+    z = EARTH_RADIUS * tan(lat_rad)
+
+    return x, z
+
+
+
+#直接输出的就是经纬高转换后的坐标
+def print_positiondata(i,data):
+
+
+    #飞机编号
+    a.append(i)
+    #计算经度所对应的坐标
+    x_lat,y_lon = lat_lon_to_xz(data.selfdata.Latitude,data.selfdata.Longitude)
+
+
+    a.append(y_lon)
+    a.append(x_lat)
+    a.append(data.selfdata.Altitude)
+    # b.append(a)
+
+    # print(i,
+    #       data.selfdata.Longitude,
+    #       data.selfdata.Latitude,
+    #       data.selfdata.Altitude)
